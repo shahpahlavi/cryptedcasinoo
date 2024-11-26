@@ -17,3 +17,27 @@
     </ul>
 </body>
 </html>
+<button id="connectWalletBtn">Connect Wallet</button>
+
+<script src="https://cdn.jsdelivr.net/npm/@solana/web3.js"></script>
+<script>
+    const { Connection, PublicKey, clusterApiUrl } = require('@solana/web3.js');
+    
+    let walletConnected = false;
+    
+    document.getElementById('connectWalletBtn').addEventListener('click', async () => {
+        if (!window.solana) {
+            alert('Solana wallet not found!');
+            return;
+        }
+
+        try {
+            await window.solana.connect();
+            walletConnected = true;
+            alert('Wallet connected!');
+        } catch (err) {
+            console.error(err);
+            alert('Connection failed.');
+        }
+    });
+</script>
